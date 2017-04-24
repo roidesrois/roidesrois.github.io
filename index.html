@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Задание 1: Мобилизация.Расписание лекций</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- build:css css/lib.min.css -->
+    <link rel="stylesheet" href="lib/normalize.css/normalize.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/style.min.css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+    <header class="header">
+        <div>
+            <img src="images/yandex-logo.svg" alt="">
+            <h1 class="header__title">Мобилизация</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="filters">
+            <form>
+                <div class="field">
+                    <label for="school">Школа</label>
+
+                    <div class="field__select-box">
+                        <select id="school">
+                            <option value="all">Все школы</option>
+                            <option value="interface">Разработки интерфейсов</option>
+                            <option value="mobile">Мобильной разработки</option>
+                            <option value="design">Мобильного дизайна</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field date-field">
+                    <label for="date">Дата</label>
+
+                    <input type="text" name="date" id="date" class="field__control" readonly="readonly" aria-label="Use the arrow keys to pick a date">
+                    <span class="field__icon field__icon_calendar"></span>
+                    <span class="field__icon field__icon_clear field__icon_hidden"></span>
+                </div>
+
+                <div class="field">
+                    <label for="lecturer">Лектор</label>
+
+                    <div class="field__select-box">
+                        <select id="lecturer"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="schedule">
+
+            <div class="schedule__lectures"></div>
+
+            <div class="schedule__not-found schedule__not-found--hidden">
+                <span>К сожалению, по Вашему запросу лекций не найдено</span>
+            </div>
+
+        </div>
+
+        <div class="popup"></div>
+    </div>
+
+    <template id="lecture-layout">
+
+        <div class="lecture__name">
+            <span>{{ name }}</span>
+        </div>
+
+        <div class="lecture__schools">
+            {{ #schools }}
+                <span>{{ name }}</span>
+            {{ /schools }}
+        </div>
+
+        <div class="lecture__lecturers">
+            {{ #lecturers }}
+            <div class="lecture__lecturer-block">
+                <span class="lecture__lecturer-name" id="{{ id }}">{{ name }}</span>
+            </div>
+            {{ /lecturers }}
+        </div>
+
+        {{ #date }}
+        <div class="lecture__date-and-room">
+            <span class="lecture__time">{{ datetime }}</span>
+            <span class="lecture__room">{{ room }}</span>
+        </div>
+        {{ /date }}
+
+        {{ #materials }}
+        <div class="lecture__materials">
+            <a href="https://events.yandex.ru/lib/talks/4266/" target="_blank" class="lecture__link">Смотреть запись</a>
+        </div>
+        {{ /materials }}
+
+    </template>
+
+
+    <template id="popup-layout">
+
+            <div class="lecturer-popup__content">
+
+                <i class="lecturer-popup__tail"></i>
+                <i class="lecturer-popup__close"></i>
+
+                <div class="lecturer-popup__img">
+                    <img src="images/lecturers/{{ imgFileName }}.jpg" alt="">
+                </div>
+
+                <div class="lecturer-popup__desc">
+                    <span class="lecturer-popup__name">{{ name }}</span>
+                    <p>{{ about }}</p>
+                </div>
+            </div>
+
+    </template>
+
+    <!-- build:js js/lib.min.js -->
+    <script src="lib/mustache/mustache.min.js"></script>
+    <script src="lib/pikaday.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/script.min.js -->
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+    <!-- endbuild -->
+
+
+</body>
+</html>

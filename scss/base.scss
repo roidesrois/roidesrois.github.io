@@ -1,0 +1,23 @@
+@include font-face('Museo Sans Cyrl 300', 'MuseoSansCyrl-300', 300, normal);
+@include font-face('Museo Sans Cyrl 500', 'MuseoSansCyrl-500', 500, normal);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #F5F5F5;
+}
+
+.container {
+    font-family: 'Museo Sans Cyrl 300', arial, sans-serif;
+	font-size: 15px;
+    width: 960px;
+    margin: 0 auto;
+
+    @media (max-width: 960px) {
+        & {
+            width: 100%;
+        }
+    }
+}

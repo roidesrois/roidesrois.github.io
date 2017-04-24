@@ -1,0 +1,198 @@
+.schedule {
+    margin: 30px 0;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
+    background-color: #fff;
+
+    &__not-found {
+        padding: 30px;
+
+        text-align: center;
+
+        &--hidden {
+            display: none;
+        }
+    }
+}
+
+.lecture {
+    padding: 15px 30px;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid #eee;
+    }
+
+    &--is-over {
+        color: #c7c7c7;
+    }
+
+    &::after {
+        @include clearfix();
+    }
+
+    &__date-and-room {
+        width: 20%;
+        display: inline-block;
+
+        vertical-align: middle;
+    }
+
+    &__time, &__room {
+        display: block;
+
+        font: 15px 'Museo Sans Cyrl 300';
+        color: rgb(149, 149, 149);;
+    }
+
+    &__room {
+        padding-top: 5px;
+    }
+
+    &__name, &__schools, &__lecturers {
+        display: inline-block;
+
+        vertical-align: middle;
+
+    }
+
+    &:not(.lecture--is-over) &__name, &:not(.lecture--is-over) &__schools {
+        color: #44b;
+    }
+
+    &__name {
+        width: 40%;
+        margin-right: 5%;
+
+        span {
+            display: block;
+        }
+    }
+
+    &__schools {
+        width: 8%;
+        margin-right: 5%;
+
+        span {
+            display: block;
+        }
+    }
+
+    &__name {
+        font-family: 'Museo Sans Cyrl 500';
+        font-size: 17px;
+    }
+
+    &__schools {
+        font-family: 'Museo Sans Cyrl 500';
+        span {
+            display: block;
+            &:not(:first-of-type) {
+                padding-top: 5px;
+            }
+        }
+    }
+
+    &__lecturers {
+        width: 20%;
+    }
+
+    &__lecturer-name {
+        border-bottom: 1px dashed rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+
+    &__lecturer-block {
+        position: relative;
+
+        display: block;
+
+        &:not(:first-of-type) {
+            padding-top: 5px;
+        }
+
+    }
+
+    &__materials {
+        width: 20%;
+        display: inline-block;
+
+        span {
+            display: block;
+            padding-bottom: 10px;
+        }
+
+    }
+
+    &__link {
+        display: inline-block;
+        color: #000;
+        font-size: 15px;
+        line-height: 30px;
+        text-decoration: none;
+        border-radius: 3px;
+        border: 1px solid #ffdb4d;
+        padding: 0 15px;
+    }
+
+    @media (max-width: 760px) {
+        & {
+            padding: 25px;
+        }
+
+        &__date-and-room {
+            width: 100%;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
+        &__materials {
+            display: block;
+            width: 100%;
+            padding-bottom: 20px;
+
+            span {
+                display: inline-block;
+                padding-right: 20px;
+
+            }
+        }
+
+        &__lecturers {
+            display: block;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        &__name, &__schools {
+            width: 100%;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
+    }
+
+
+    @media (max-width: 560px) {
+        & {
+            padding: 20px;
+        }
+
+        &__date-and-room {
+            padding-bottom: 20px;
+        }
+
+        &__materials {
+            padding-bottom: 20px;
+
+            span {
+                padding-right: 15px;
+            }
+        }
+
+        &__name, &__schools {
+            padding-bottom: 20px;
+        }
+    }
+
+}
+
