@@ -1,9 +1,30 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Museo Sans Cyrl 300";
+  src: url("../fonts/MuseoSansCyrl-300.woff2") format("woff2"), url("../fonts/MuseoSansCyrl-300.woff") format("woff");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Museo Sans Cyrl 500";
+  src: url("../fonts/MuseoSansCyrl-500.woff2") format("woff2"), url("../fonts/MuseoSansCyrl-500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal; }
+
 * {
   box-sizing: border-box; }
 
 body {
   background: #F5F5F5; }
+
+.container {
+  font-family: 'Museo Sans Cyrl 300', arial, sans-serif;
+  font-size: 15px;
+  width: 960px;
+  margin: 0 auto; }
+  @media (max-width: 960px) {
+    .container {
+      width: 100%; } }
 
 .header {
   position: relative;
@@ -69,17 +90,30 @@ body {
     font-size: 15px;
     left: 0;
     top: 0; }
+  .field select, .field input {
+    font-family: 'Museo Sans Cyrl 300', arial, sans-serif;
+    font-size: 15px;
+    height: 33px; }
   .field select {
     width: 100%;
     padding: 0 15px;
-    line-height: 30px;
-    font-size: 15px;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none; }
+  .field input {
+    width: 100%;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
   .field__select-box {
     position: relative; }
     .field__select-box.focused::after {
@@ -94,24 +128,10 @@ body {
       margin-top: -2px;
       content: '';
       background: url(../images/icons/select-icon.svg);
-      -webkit-transition: -webkit-transform .1s ease-out;
       transition: -webkit-transform .1s ease-out;
       transition: transform .1s ease-out;
       transition: transform .1s ease-out, -webkit-transform .1s ease-out;
       transition: transform .1s ease-out,-webkit-transform .1s ease-out; }
-  .field input {
-    width: 100%;
-    height: 33px;
-    padding: 0px 10px;
-    box-sizing: border-box;
-    font-size: 13px;
-    border-radius: 3px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; }
   .field__icon {
     position: absolute;
     display: block;
@@ -159,7 +179,7 @@ body {
       display: none; }
 
 .lecture {
-  padding: 20px 30px; }
+  padding: 15px 30px; }
   .lecture:not(:last-of-type) {
     border-bottom: 1px solid #eee; }
   .lecture--is-over {
@@ -261,37 +281,16 @@ body {
     .lecture__name, .lecture__schools {
       padding-bottom: 20px; } }
 
-@font-face {
-  font-family: "Museo Sans Cyrl 300";
-  src: url("../fonts/MuseoSansCyrl-300.woff2") format("woff2"), url("../fonts/MuseoSansCyrl-300.woff") format("woff");
-  font-weight: 300;
-  font-style: normal; }
-
-@font-face {
-  font-family: "Museo Sans Cyrl 500";
-  src: url("../fonts/MuseoSansCyrl-500.woff2") format("woff2"), url("../fonts/MuseoSansCyrl-500.woff") format("woff");
-  font-weight: 500;
-  font-style: normal; }
-
-.container {
-  font-family: 'Museo Sans Cyrl 300', arial, sans-serif;
-  font-size: 15px;
-  width: 960px;
-  margin: 0 auto; }
-  @media (max-width: 960px) {
-    .container {
-      width: 100%; } }
-
 .popup {
   position: absolute; }
 
 .lecturer-popup__content {
   position: absolute;
-  left: -190px;
-  bottom: 40px;
+  left: -215px;
+  bottom: 35px;
   z-index: 999;
   padding: 20px;
-  width: 500px;
+  width: 550px;
   background: #fff;
   border-radius: 3px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16), 0px 4px 5px 0px rgba(0, 0, 0, 0.23); }
@@ -307,7 +306,7 @@ body {
   position: absolute;
   bottom: -12px;
   border-radius: 3px;
-  left: 238px;
+  left: 263px;
   width: 25px;
   height: 25px;
   background: #fff;
@@ -345,7 +344,7 @@ body {
   display: block;
   padding-left: 20px;
   float: left;
-  width: 300px; }
+  width: 335px; }
   .lecturer-popup__desc p {
     margin: 0;
     padding: 0;
