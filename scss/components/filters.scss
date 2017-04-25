@@ -45,6 +45,10 @@
         font-family: 'Museo Sans Cyrl 300', arial, sans-serif;
         font-size: 15px;
         height: 33px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+         appearance: none;
     }
 
     select {
@@ -53,7 +57,10 @@
         background-color: #fff;
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 3px;
-        appearance: none;
+    }
+
+    select::-ms-expand {
+        display: none;
     }
 
     input {
@@ -64,9 +71,6 @@
         background: white;
         border: 1px solid rgba(0,0,0,0.2);
         outline: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
     }
 
     &__select-box {

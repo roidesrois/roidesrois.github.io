@@ -1,26 +1,26 @@
 (function() {
 
-    var now = new Date(2016, 10, 1);
+    var now = new Date(2016, 10, 10);
 
-    var contentElem = document.querySelector(".container");
-    var scheduleElem = document.querySelector(".schedule");
-    var schoolSelectElem = document.querySelector("#school");
-    var lecturerSelectElem = document.querySelector("#lecturer");
-    var dateSelectElem = document.querySelector("#date");
+    var container = document.querySelector(".container"),
+        schedule = document.querySelector(".schedule"),
+        schoolSelect = document.querySelector("#school"),
+        dateSelect = document.querySelector("#date"),
+        lecturerSelect = document.querySelector("#lecturer");
 
 
     // рендерим список преподавателей и лекции
-    renderLecturers(lecturerSelectElem);
+    renderLecturers(lecturerSelect);
     var filteredLectures = filterLectures();
-    renderLectures(scheduleElem, filteredLectures);
+    renderLectures(schedule, filteredLectures);
 
 
     // вешаем обработчики на все селекты
-    [schoolSelectElem, lecturerSelectElem, dateSelectElem].forEach(function(selectElem) {
+    [schoolSelect, lecturerSelect, dateSelect].forEach(function(selectElem) {
         selectElem.addEventListener("change", function(event) {
             event.preventDefault();
-            var filteredLectures = filterLectures(schoolSelectElem, lecturerSelectElem, dateSelectElem);
-            renderLectures(scheduleElem, filteredLectures);
+            var filteredLectures = filterLectures(schoolSelect, lecturerSelect, dateSelect);
+            renderLectures(schedule, filteredLectures);
         });
 
         // разворачиваем select icon на 180*
@@ -38,29 +38,30 @@
 
     /**
      * @calendar
-     * @description Инициализируем custom-ый datepicker
+     * @description Инициализируем кастомный datepicker
      */
     function DatePicker(el) {
+        self = this;
         this.el = el;
         this.dateControl = el.querySelector('[name=date]');
         this.pickerIcon = el.querySelector(".field__icon_calendar");
         this.clearIcon = el.querySelector(".field__icon_clear");
 
-        this.init = function() {
+        self.init = function() {
             this.dateControl.setAttribute("readonly", "readonly");
             this.initCustomDatePicker();
         },
-        this.setValue = function(datePicker) {
+        self.setValue = function(datePicker) {
             this.dateControl.value = formatDate(datePicker.getDate());
             this.pickerIcon.classList.add("field__icon_hidden");
             this.clearIcon.classList.remove("field__icon_hidden");
         },
-        this.clearValue = function(datePicker) {
+        self.clearValue = function(datePicker) {
             datePicker.setDate(null);
             this.clearIcon.classList.add("field__icon_hidden");
             this.pickerIcon.classList.remove("field__icon_hidden");
         },
-        this.initCustomDatePicker = function(datePicker) {
+        self.initCustomDatePicker = function(datePicker) {
             var datePicker = new Pikaday({
                 field: this.dateControl,
                 firstDay: 1,
@@ -71,11 +72,11 @@
                     weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
                     weekdaysShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
                 },
-                onSelect: () => this.setValue(datePicker)
+                onSelect: function() {self.setValue(datePicker)},
             });
 
-            this.pickerIcon.addEventListener("click", () => datePicker.show());
-            this.clearIcon.addEventListener("click", () => this.clearValue(datePicker));
+            this.pickerIcon.addEventListener("click", function() {datePicker.show()});
+            this.clearIcon.addEventListener("click", function() {self.clearValue(datePicker)});
         }
     }
 
@@ -86,8 +87,8 @@
     function formatDate(date) {
         var year = date.getFullYear(),
             month = date.getMonth() + 1,
-            day = date.getDate();
-            hours = date.getUTCHours();
+            day = date.getDate(),
+            hours = date.getUTCHours(),
             minutes = date.getUTCMinutes();
 
         return [leadZero(day), leadZero(month),year].join('.');
@@ -99,9 +100,9 @@
 
     /**
      * Функция фильтрует данные на основе активных фильтров.
-     * @param schoolSelectElem {Element} Выпадающий список со школами.
-     * @param lecturerSelectElem {Element} Выпадающий список с преподавателями.
-     * @param dateSelectElem {Element} Datepicker.
+     * @param schoolSelect {Element} Выпадающий список со школами.
+     * @param lecturerSelect {Element} Выпадающий список с преподавателями.
+     * @param dateSelect {Element} Datepicker.
      * @returns {Array} Массив отфильтрованных лекций.
      */
     function filterLectures() {
@@ -109,7 +110,7 @@
 
 
         // фильтрация по школе
-        var schoolValue = schoolSelectElem.value;
+        var schoolValue = schoolSelect.value;
 
         if (schoolValue !== "all") {
 
@@ -125,8 +126,8 @@
         }
 
         // фильтрация по дате
-        if (dateSelectElem.value) {
-            var dateValue = formatDate(new Date(Date.parse(dateSelectElem.value)));
+        if (dateSelect.value) {
+            var dateValue = formatDate(new Date(Date.parse(dateSelect.value)));
 
             lectures = lectures.filter(function(lecture) {
                 var flag = false;
@@ -144,7 +145,7 @@
 
 
         // сортировка по преподавателю
-        var lecturerValue = lecturerSelectElem.value;
+        var lecturerValue = lecturerSelect.value;
 
         if (lecturerValue !== "all") {
 
@@ -166,12 +167,12 @@
 
     /**
      * Функция рендерит расписание на основе переданного массива лекций.
-     * @param scheduleElem {Element} Элемент расписания на странице.
+     * @param schedule {Element} Элемент расписания на странице.
      * @param lectures {Array} Массив лекций.
      */
-    function renderLectures(scheduleElem, lectures) {
-        var lecturesElem = scheduleElem.querySelector(".schedule__lectures");
-        var noResultsElem = scheduleElem.querySelector(".schedule__not-found");
+    function renderLectures(schedule, lectures) {
+        var lecturesElem = schedule.querySelector(".schedule__lectures");
+        var noResultsElem = schedule.querySelector(".schedule__not-found");
 
         lecturesElem.innerHTML = "";
 
@@ -183,7 +184,7 @@
 
             lectures.forEach(function (rawLectureData) {
                 var lectureData = {};
-                date = new Date(Date.parse(rawLectureData.datetime));
+                var date = new Date(Date.parse(rawLectureData.datetime));
                 lectureData.datetime = formatDate(date)+ ", "+[leadZero(date.getUTCHours()),leadZero(date.getUTCMinutes())].join(':');
                 lectureData.name = rawLectureData.name;
                 lectureData.room = rawLectureData.room;
@@ -225,7 +226,7 @@
 
 
     function showLecturerPopup(lecturerId, clickPos) {
-        var popup = contentElem.querySelector(".popup");
+        var popup = container.querySelector(".popup");
         popup.innerHTML = "";
 
         var fragment = document.createDocumentFragment();
@@ -242,8 +243,8 @@
 
         popup.appendChild(fragment);
 
-        popup.style.left = window.pageXOffset + clickPos['x']+'px';
-        popup.style.top = window.pageYOffset + clickPos['y']+'px';
+        popup.style.left = window.pageXOffset + clickPos.x+'px';
+        popup.style.top = window.pageYOffset + clickPos.y+'px';
 
         var closePopup = document.querySelector(".lecturer-popup__close");
         closePopup.addEventListener("click", function(event) {
@@ -255,9 +256,9 @@
 
     /**
      * Добавляет в выпадающий список всех преподавателей.
-     * @param lecturerSelectElem {Element} Элемент выпадающего списка с преподавателями.
+     * @param lecturerSelect {Element} Элемент выпадающего списка с преподавателями.
      */
-    function renderLecturers(lecturerSelectElem) {
+    function renderLecturers(lecturerSelect) {
         var fragment = document.createDocumentFragment();
 
         var allOption = document.createElement("option");
@@ -272,7 +273,7 @@
             fragment.appendChild(currentOption);
         });
 
-        lecturerSelectElem.appendChild(fragment);
+        lecturerSelect.appendChild(fragment);
     }
 
 
