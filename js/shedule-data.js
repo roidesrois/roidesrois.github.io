@@ -13,7 +13,7 @@
             schools: ["design"],
             lecturers: ["sergeyt", "darias"],
             room: "Переговорка «Гарвард»",
-            datetime: "2016-10-20T19:00"
+            datetime: "2017-03-20T19:00"
         },
 
         {
@@ -21,7 +21,7 @@
             schools: ["design"],
             lecturers: ["sergeyk"],
             room: "Желтая аудитория",
-            datetime: "2016-10-27T18:30",
+            datetime: "2017-03-27T18:30",
             material: "https://events.yandex.ru/lib/talks/4189/"
         },
 
@@ -30,7 +30,7 @@
             schools: ["interface"],
             lecturers: ["dmitriyd"],
             room: "Желтая аудитория",
-            datetime: "2016-11-03T19:00"
+            datetime: "2017-05-03T19:00"
         },
 
         {
@@ -38,7 +38,7 @@
             schools: ["interface"],
             lecturers: ["sergeyb"],
             room: "Синий кит",
-            datetime: "2016-11-11T18:00"
+            datetime: "2017-05-11T18:00"
         },
 
         {
@@ -46,7 +46,7 @@
             schools: ["mobile"],
             lecturers: ["dmitriys"],
             room: "Желтая аудитория",
-            datetime: "2016-11-17T20:00"
+            datetime: "2017-05-17T20:00"
         },
 
         {
@@ -54,7 +54,7 @@
             schools: ["interface"],
             lecturers: ["dmitriyd"],
             room: "Синий кит",
-            datetime: "2016-11-24T18:30"
+            datetime: "2017-05-24T18:30"
         },
 
         {
@@ -62,7 +62,7 @@
             schools: ["interface"],
             lecturers: ["andryp"],
             room: "Переговорка «Гарвард»",
-            datetime: "2016-12-01T19:00"
+            datetime: "2017-06-01T19:00"
         },
 
         {
@@ -70,7 +70,7 @@
             lecturers: ["andryp"],
             schools: ["interface"],
             room: "Переговорка «Принстон»",
-            datetime: "2016-12-01T19:00"
+            datetime: "2017-06-01T19:00"
         },
 
         {
@@ -78,7 +78,7 @@
             schools: ["mobile"],
             lecturers: ["eduardm"],
             room: "Синий кит",
-            datetime: "2016-10-19T19:30"
+            datetime: "2017-03-19T19:30"
         },
 
         {
@@ -86,7 +86,7 @@
             lecturers: ["andrym"],
             schools: ["interface"],
             room: "Переговорка «Принстон»",
-            datetime: "2016-10-19T20:00"
+            datetime: "2017-03-19T20:00"
         },
 
         {
@@ -94,7 +94,7 @@
             schools: ["mobile"],
             lecturers: ["alexsh"],
             room: "Экстрополис",
-            datetime: "2016-11-02T18:00"
+            datetime: "2017-05-02T18:00"
         },
 
         {
@@ -102,7 +102,7 @@
             lecturers: ["alexm"],
             schools: ["mobile"],
             room: "Переговорка «Оксфорд»",
-            datetime: "2016-11-09T18:30"
+            datetime: "2017-05-09T18:30"
         },
 
         {
@@ -110,7 +110,7 @@
             schools: ["mobile"],
             lecturers: ["vladimirt"],
             room: "Экстрополис",
-            datetime: "2016-11-09T18:30"
+            datetime: "2017-05-09T18:30"
         },
 
         {
@@ -118,7 +118,7 @@
             schools: ["design"],
             lecturers: ["antont"],
             room: "Переговорка «Оксфорд»",
-            datetime: "2016-10-18T19:00"
+            datetime: "2017-03-18T19:00"
         },
 
         {
@@ -126,7 +126,7 @@
             schools: ["design"],
             lecturers: ["nikolaiv"],
             room: "Экстрополис",
-            datetime: "2016-10-25T19:00",
+            datetime: "2017-03-25T19:00",
             material: ""
         },
 
@@ -135,7 +135,7 @@
             lecturers: ["ivank"],
             schools: ["interface"],
             room: "Желтая аудитория",
-            datetime: "2016-11-01T20:00"
+            datetime: "2017-05-01T20:00"
         },
 
         {
@@ -143,7 +143,7 @@
             schools: ["design", "mobile"],
             lecturers: ["nikolaiv"],
             room: "Желтая аудитория",
-            datetime: "2016-11-01T19:00"
+            datetime: "2017-05-01T19:00"
         },
 
         {
@@ -151,7 +151,7 @@
             schools: ["design"],
             lecturers: ["sergeyt", "darias"],
             room: "Переговорка «Оксфорд»",
-            datetime: "2016-11-08T18:00"
+            datetime: "2017-05-08T18:00"
         },
 
         {
@@ -159,7 +159,7 @@
             schools: ["design"],
             lecturers: ["andryg"],
             room: "Экстрополис",
-            datetime: "2016-11-08T18:30"
+            datetime: "2017-05-08T18:30"
         },
 
         {
@@ -167,7 +167,7 @@
             schools: ["design"],
             lecturers: ["sergeyt", "darias"],
             room: "Переговорка «Оксфорд»",
-            datetime: "2016-11-15T19:00"
+            datetime: "2017-05-15T19:00"
         },
 
         {
@@ -175,7 +175,7 @@
             schools: ["interface", "design"],
             lecturers: ["yurip"],
             room: "Синий кит",
-            datetime: "2016-11-15T18:00"
+            datetime: "2017-05-15T18:00"
         },
 
         {
@@ -183,7 +183,7 @@
             schools: ["design"],
             lecturers: ["andryg"],
             room: "Синий кит",
-            datetime: "2016-11-22T19:00"
+            datetime: "2017-05-22T19:00"
         },
 
         {
@@ -191,7 +191,7 @@
             schools: ["interface", "design"],
             lecturers: ["alexk"],
             room: "Желтая аудитория",
-            datetime: "2016-11-29T20:00"
+            datetime: "2017-05-29T20:00"
         },
 
         {
@@ -199,7 +199,7 @@
             lecturers: ["maximv"],
             schools: ["interface"],
             room: "Экстрополис",
-            datetime: "2016-12-06T20:00"
+            datetime: "2017-06-06T20:00"
         }
 
     ];
@@ -209,7 +209,7 @@
 
         "dmitriyd": {
             name: "Дмитрий Душкин",
-            about: "Кандидат технических наук, научный сотрудник ИПУ РАН с 2008 по 2013. Пришёл в Яндекс.Картинки в 2014 году, отвечал за мобильную версию и рост производительности сервиса. В 2016 перешёл в Yandex Data Factory, где разрабатывает интерфейсы и дизайн веб-приложений для B2B."
+            about: "Кандидат технических наук, научный сотрудник ИПУ РАН с 2008 по 2013. Пришёл в Яндекс.Картинки в 2014 году, отвечал за мобильную версию и рост производительности сервиса. В 2017 перешёл в Yandex Data Factory, где разрабатывает интерфейсы и дизайн веб-приложений для B2B."
         },
 
         "maximv": {

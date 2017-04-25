@@ -1,6 +1,6 @@
 (function() {
 
-    var now = new Date(2016, 10, 10);
+    var now = new Date();
 
     var container = document.querySelector(".container"),
         schedule = document.querySelector(".schedule"),
