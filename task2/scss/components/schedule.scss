@@ -1,0 +1,457 @@
+.schedule {
+    margin: 30px 0;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
+    background-color: #fff;
+
+    &__not-found {
+        padding: 30px;
+
+        text-align: center;
+
+        &--hidden {
+            display: none;
+        }
+    }
+}
+
+.lecture {
+    padding: 15px 30px;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid #eee;
+    }
+
+    &--is-over {
+        color: #c7c7c7;
+    }
+
+    &::after {
+        @include clearfix();
+    }
+
+    &:hover &__edit-button a {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__date-and-room {
+        width: 20%;
+        display: inline-block;
+
+        vertical-align: middle;
+    }
+
+    &__time, &__room {
+        display: block;
+
+        font: 15px 'Museo Sans Cyrl 300';
+        color: rgb(149, 149, 149);;
+    }
+
+    &__room {
+        padding-top: 5px;
+    }
+
+    &__name, &__schools, &__lecturers {
+        display: inline-block;
+
+        vertical-align: middle;
+
+    }
+
+    &:not(.lecture--is-over) &__name, &:not(.lecture--is-over) &__schools {
+        color: #44b;
+    }
+
+    &__name {
+        width: 40%;
+        margin-right: 5%;
+
+        span {
+            display: block;
+        }
+    }
+
+    &__schools {
+        width: 5%;
+        margin-right: 5%;
+
+        span {
+            display: block;
+        }
+    }
+
+    &__name {
+        font-family: 'Museo Sans Cyrl 500';
+        font-size: 17px;
+    }
+
+    &__schools {
+        font-family: 'Museo Sans Cyrl 500';
+        span {
+            display: block;
+            &:not(:first-of-type) {
+                padding-top: 5px;
+            }
+        }
+    }
+
+    &__lecturers {
+        width: 20%;
+    }
+
+    &__lecturer-name {
+        border-bottom: 1px dashed rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+
+    &__lecturer-block {
+        position: relative;
+
+        display: block;
+
+        &:not(:first-of-type) {
+            padding-top: 5px;
+        }
+
+    }
+
+    &__materials {
+        width: 20%;
+        display: inline-block;
+
+        span {
+            display: block;
+            padding-bottom: 10px;
+        }
+
+    }
+
+    &__link {
+        display: inline-block;
+        color: #000;
+        font-size: 15px;
+        line-height: 30px;
+        text-decoration: none;
+        border-radius: 3px;
+        border: 1px solid #ffdb4d;
+        padding: 0 15px;
+    }
+
+    &__edit-button {
+        width: 3%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__edit-button a {
+        display: inline-block;
+        visibility: hidden;
+        opacity: 0;
+        float: right;
+        cursor: pointer;
+    }
+
+    &__edit-button i {
+        transition: background 0.3s;
+        width: 28px;
+        height: 28px;
+        display: inline-block;
+        background: url(../images/icons/edit.svg);
+        background-size: contain;
+    }
+
+    @media (max-width: 760px) {
+        & {
+            padding: 25px;
+        }
+
+        &__date-and-room {
+            width: 100%;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
+        &__materials {
+            display: block;
+            width: 100%;
+            padding-bottom: 20px;
+
+            span {
+                display: inline-block;
+                padding-right: 20px;
+
+            }
+        }
+
+        &__lecturers {
+            display: block;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        &__name, &__schools {
+            width: 100%;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
+    }
+
+
+    @media (max-width: 560px) {
+        & {
+            padding: 20px;
+        }
+
+        &__date-and-room {
+            padding-bottom: 20px;
+        }
+
+        &__materials {
+            padding-bottom: 20px;
+
+            span {
+                padding-right: 15px;
+            }
+        }
+
+        &__name, &__schools {
+            padding-bottom: 20px;
+        }
+    }
+
+}
+
+/*Add lecture form*/
+
+.modal {
+    display: none;
+    position: fixed;
+    margin: 0 auto;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.55);
+    transition: all 0.8s ease-out;
+
+        &:before {
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            content: '';
+        }
+}
+
+
+.modal__wrapper {
+    z-index: 4;
+    position: relative;
+    color: #414141;
+    background-color: white;
+    margin: auto;
+    max-width: 800px;
+    width: 90%;
+}
+
+.modal__content {
+    height: 100%;
+    padding: 0 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* The Close Button */
+.modal__close i {
+    position: absolute;
+    top: 27px;
+    right: 22px;
+    width: 14px;
+    height: 14px;
+    background: url(../images/icons/close.svg);
+    cursor: pointer;
+}
+.form__header {
+    color: #44b;
+}
+
+.lecture-add {
+   /* display: none;*/
+    margin-bottom: 50px;
+}
+
+.lecture-add__wrapper {
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+
+    max-width: 570px;
+    max-height: 98%;
+    height: auto;
+    overflow-y: auto;
+
+    display: inline-block;
+    white-space: normal;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.lecture-add__content {
+    height: auto;
+}
+
+.lecture-form {
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.form__cancel {
+    margin-right: 10px;
+}
+
+.lecture-add__date-row {
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.lecture-form .form-item__input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lecture-add__time.form-item__input {
+    width: 50px;
+}
+
+.lecture-add__time-divider {
+    align-self: center;
+    padding: 0 3px;
+}
+
+.lecture-add__error {
+    color: red;
+    visibility: hidden;
+    margin-bottom: 10px;
+}
+.form-item__input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 7px;
+    margin-top: 5px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.dote-icon {
+    width: 10px;
+    height: 10px;
+    display: flex;
+    margin: 5px 10px 5px 0;
+}
+
+.close-icon {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 21.9 21.9' enable-background='new 0 0 21.9 21.9' width='15px' height='15px'%3E%3Cpath d='M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0 c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4 s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3 s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7 s-0.1-0.5-0.3-0.7L14.1,11.3z' fill='%23b5b5b5'/%3E%3C/svg%3E") no-repeat;
+}
+
+.button {
+    display: inline-block;
+    color: #000;
+    font-size: 15px;
+    line-height: 30px;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #ffdb4d;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row.buttons {
+    justify-content: flex-end;
+}
+
+.row.lecturers-and-rooms > .column:last-child {
+    margin-left: 10%;
+}
+.row.lecturers-and-rooms > .column {
+    width: 45%;
+}
+
+.date-select {
+    position: relative;
+}
+
+@media all and (max-width: 670px) {
+    .speaker__photo {
+        height: 150px;
+    }
+
+    .lecture-add__wrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .lecture-form {
+        width: 100%;
+    }
+
+    .modal-list-item__name {
+        min-width: 200px;
+        margin-bottom: 10px;
+    }
+
+    .modal-list__list-title {
+        display: none;
+    }
+    .date-select {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+}
+
+.modal-list {
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+    max-width: 520px;
+    overflow-y: auto;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: middle;
+    text-align: left;
+    height: auto;
+}
+.modal-list .column {
+    margin-bottom: 15px;
+}
+
+.modal-list textarea {
+    resize: none;
+}
+
+.lecture-popup, .schools-popup, .rooms-popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    white-space: nowrap;
+    text-align: center;
+}

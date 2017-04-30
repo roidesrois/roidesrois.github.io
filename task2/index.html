@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Задание 2: Мобилизация. API для работы с расписанием лекций</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- build:css css/lib.min.css -->
+    <link rel="stylesheet" href="lib/normalize.css/normalize.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/style.min.css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- endbuild -->
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if IE]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <header class="header">
+        <div>
+            <img src="images/yandex-logo.svg" alt="">
+            <h1 class="header__title">Мобилизация</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="filters">
+            <form>
+                <div class="field">
+                    <label for="school">Школа</label>
+
+                    <div class="field__select-box">
+                        <select id="school"></select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="lecturer">Лектор</label>
+
+                    <div class="field__select-box">
+                        <select id="lecturer"></select>
+                    </div>
+                </div>
+
+                <div class="field third">
+                    <label for="room">Aудитория</label>
+
+                    <div class="field__select-box">
+                        <select id="room"></select>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="field date-field">
+                    <label for="date__start">Начальная дата</label>
+
+                    <input type="text" name="from" id="date__start" class="field__control" readonly="readonly" aria-label="Use the arrow keys to pick a date">
+                    <span class="field__icon field__icon_calendar date__start"></span>
+                    <span class="field__icon field__icon_clear field__icon_hidden date__start"></span>
+                </div>
+
+                <div class="field date-field date__end">
+                    <label for="date__end">Конечная дата</label>
+
+                    <input type="text" name="to" id="date__end" class="field__control" readonly="readonly" aria-label="Use the arrow keys to pick a date">
+                    <span class="field__icon field__icon_calendar date__end"></span>
+                    <span class="field__icon field__icon_clear field__icon_hidden date__end"></span>
+                </div>
+
+            </form>
+
+                <div class="field">
+                    <input class="button add-lecture" type="submit" value="Добавить лекцию">
+                    <span class="field__icon_edit"></span>
+                </div>
+
+                <div class="field">
+                    <input class="button open-schools-popup" type="submit" value="Школы">
+                    <span class="field__icon_edit"></span>
+                </div>
+
+                <div class="field">
+                    <input class="button open-rooms-popup" type="submit" value="Аудитории">
+                    <span class="field__icon_edit"></span>
+                </div>
+        </div>
+
+        <div class="schedule">
+
+            <div class="schedule__lectures"></div>
+
+            <div class="schedule__not-found schedule__not-found--hidden">
+                <span>К сожалению, по Вашему запросу лекций не найдено</span>
+            </div>
+
+        </div>
+
+        <div class="popup"></div>
+    </div>
+
+    <template id="lecture-layout">
+
+        <div class="lecture__name">
+            <span>{{ name }}</span>
+        </div>
+
+        <div class="lecture__schools">
+            {{ #schools }}
+                <span>{{ name }}</span>
+            {{ /schools }}
+        </div>
+
+        <div class="lecture__lecturers">
+            {{ #lecturers }}
+            <div class="lecture__lecturer-block">
+                <span class="lecture__lecturer-name" id="{{ teacherId }}">{{ name }}</span>
+            </div>
+            {{ /lecturers }}
+        </div>
+
+        {{ #date }}
+        <div class="lecture__date-and-room">
+            <span class="lecture__time">{{ datetime }},  {{ start }} - {{ end }}</span>
+            <span class="lecture__room">{{ room }}</span>
+        </div>
+
+        <div class="lecture__edit-button">
+            <a class="edit-button show-edit" id='{{ id }}'><i class="edit-icon"></i></a>
+        </div>
+        {{ /date }}
+
+        {{ #materials }}
+        <div class="lecture__materials">
+            <a href="{{ link }}" target="_blank" class="lecture__link button">Смотреть запись</a>
+        </div>
+        {{ /materials }}
+
+    </template>
+
+
+    <template id="popup-layout">
+
+            <div class="lecturer-popup__content">
+
+                <i class="lecturer-popup__tail"></i>
+                <i class="lecturer-popup__close"></i>
+
+                <div class="lecturer-popup__img">
+                    <img src="images/lecturers/{{ imgFileName }}.jpg" alt="">
+                </div>
+
+                <div class="lecturer-popup__desc">
+                    <span class="lecturer-popup__name">{{ name }}</span>
+                    <p>{{ about }}</p>
+                </div>
+            </div>
+
+    </template>
+
+    <template id="add-lecture-popup-layout">
+            <section class="lecture-add modal modal-close ">
+                <div class="lecture-add__wrapper modal__wrapper">
+                    <div class="lecture-add__content modal__content column">
+                        <a class="modal__close"><i class="lecturer-popup__close"></i></a>
+
+                        <h2 class="form__header">Добавить лекцию</h2>
+                        <form class="lecture-form form column">
+                            <label for="lecture-add__title" class="label--h4 label--h">Название *:</label>
+                            <div class="column">
+                                <input id="lecture-add__title" class="form-item__input lecture-add__title" value="{{ name }}" type="text"
+                                       required placeholder="Название лекции"/>
+                                <p class="lecture-add__error error"></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="lecture-add__date-wrapper column">
+                                <div class="lecture-add__date-row row">
+                                    <div class="column date-select">
+                                        <label for="lecture-add__date" class="label--h4 label--h">Дата *:</label>
+                                        <input id="lecture-add__date" name="date" class="field__control date__input form-item__input lecture-add__date" value="{{ datetime }}" type="text" required placeholder="Выберите дату"/>
+                                        <span class="field__icon field__icon_calendar"></span>
+                                        <span class="field__icon field__icon_clear field__icon_hidden"></span>
+                                    </div>
+                                    <div class="column">
+                                        <label for="lecture-add__time-start-hours" class="label--h5 label--h">Начало *</label>
+                                        <div class="row">
+                                            <div class="column">
+                                                <input id="lecture-add__time-start-hours"
+                                                       class="lecture-add__time form-item__input lecture-add__time-start-hours"
+                                                       value="{{ startHour }}" type="number" min="0" max="23" required>
+                                            </div>
+                                            <span class="divider lecture-add__time-divider column">-</span>
+                                            <div class="column">
+                                                <input id="lecture-add__time-start-minutes"
+                                                       class="lecture-add__time form-item__input lecture-add__time-start-minutes"
+                                                       value="{{ startMinutes }}" type="number" min="0" max="59" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column">
+                                        <label for="lecture-add__time-end-hours" class="label--h5 label--h">Окончание *</label>
+                                        <div class="row">
+                                            <div class="column">
+                                                <input id="lecture-add__time-end-hours"
+                                                       class="lecture-add__time form-item__input lecture-add__time-end-hours"
+                                                       value="{{ endHour }}" type="number" min="0" max="23" required>
+                                            </div>
+                                            <span class="divider lecture-add__time-divider column">-</span>
+                                            <div class="column">
+                                                <input id="lecture-add__time-end-minutes"
+                                                       class="lecture-add__time form-item__input lecture-add__time-end-minutes"
+                                                       value="{{ endMinutes }}" type="number" min="0" max="59" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="lecture-add__error error"></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <label for="lecture-add__schools" class="label--h4 label--h">Школа *:</label>
+                            <div class="lecture-add__schools-wrapper column">
+                                <select id="lecture-add__schools" class="form-item__input lecture-add__schools" multiple
+                                        required>
+                                </select>
+                                <p class="lecture-add__error error"></p>
+                            </div>
+                            <div class="row lecturers-and-rooms">
+                                <div class="column">
+                                    <label for="lecture-add__lecturers" class="label--h4 label--h">Лектор *:</label>
+                                    <div class="lecture-add__lecturers-wrapper column">
+                                        <select id="lecture-add__lecturers" class="form-item__input lecture-add__lecturers"
+                                                required></select>
+                                        <p class="lecture-add__error error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <label for="lecture-add__rooms" class="label--h4 label--h">Аудитория *:</label>
+                                    <div class="lecture-add__rooms-wrapper column">
+                                        <select id="lecture-add__rooms" class="form-item__input lecture-add__rooms"
+                                                required></select>
+                                        <p class="lecture-add__error error"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons row">
+                                <a class="form__cancel link button "
+                                   title="Отмена">Отмена</a>
+                                <input class="link submit button" type="submit"
+                                       value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+    </template>
+
+
+    <template id="schools-popup-layout">
+            <section class="modal-schools modal modal-close">
+                <div class="modal-list modal__wrapper">
+                    <div class="modal__content column">
+                        <a class="modal__close"><i class="close-icon link"></i></a>
+
+                        <div class="form__header row">
+                            <h2>Редактирование данных о школах</h2>
+                        </div>
+
+                        <form class="schools__add-and-edit">
+
+                            <div class="column">
+                                <label for="schoolFormActionSelect">Выберите действие</label>
+                                <select class="form-item__input" id="schoolFormActionSelect">
+                                    <option value="">Не выбрано</option>
+                                    <option value="add">Добавить новую школу</option>
+                                    <option value="change">Изменить школу</option>
+                                </select>
+                            </div>
+                            <div class="column">
+                                <label for="schoolFormSchoolSelect">Выберите школу</label>
+                                <select class="form-item__input" disabled id="schoolFormSchoolSelect">
+                                </select>
+                            </div>
+
+                            <div class="column">
+                                <label class="control-label" for="schoolName">Название школы</label>
+                                <input type="text" class="form-item__input" disabled id="schoolName" placeholder="Введите название школы">
+                            </div>
+
+                            <div class="column">
+                                <label class="control-label" for="countOfStudents">Количество студентов</label>
+                                <input type="number" class="form-item__input" disabled id="countOfStudents" placeholder="Введите целое число от 1 до 100">
+                            </div>
+
+                            <div class="buttons row">
+                                <a class="form__cancel link button" title="Отмена">Отмена</a>
+                                <input class="link submit button" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+    </template>
+
+
+    <template id="rooms-popup-layout">
+            <section class="modal-schools modal modal-close">
+                <div class="modal-list modal__wrapper">
+                    <div class="modal__content column">
+                        <a class="modal__close"><i class="close-icon link"></i></a>
+
+                        <div class="form__header row">
+                            <h2>Редактирование данных об аудиториях</h2>
+                        </div>
+
+                        <form class="rooms__add-and-edit">
+
+                            <div class="column">
+                                <label for="roomFormActionSelect">Выберите действие</label>
+                                <select class="form-item__input" id="roomFormActionSelect">
+                                    <option value="">Не выбрано</option>
+                                    <option value="add">Добавить новую аудиторию</option>
+                                    <option value="change">Изменить аудиторию</option>
+                                </select>
+                            </div>
+
+                            <div class="column">
+                                <label class="control-label" for="roomName">Название аудитории</label>
+                                <input type="text" class="form-item__input" disabled id="roomName" placeholder="Введите название аудитории">
+                            </div>
+
+                            <div class="column">
+                                <label for="roomFormSelect">Выберите аудиторию</label>
+                                <select class="form-item__input" disabled id="roomFormSelect"></select>
+                            </div>
+
+                            <div class="column">
+                                <label class="control-label" for="capacityOfRoom">Вместимость аудитории</label>
+                                <input type="number" class="form-item__input" disabled id="capacityOfRoom" placeholder="Введите целое число">
+                            </div>
+
+                            <div class="column">
+                                <label class="control-label" for="descriptionOfRoom">Описание аудитории</label>
+                                <textarea rows="6" class="form-item__input" disabled id="descriptionOfRoom" placeholder="Введите описание аудитории"></textarea>
+                            </div>
+
+                            <div class="buttons row">
+                                <a class="form__cancel link button" title="Отмена">Отмена</a>
+                                <input class="link submit button" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+    </template>
+
+
+    <!-- build:js js/lib.min.js -->
+    <script src="lib/mustache/mustache.min.js"></script>
+    <script src="lib/moment.js"></script>
+    <script src="lib/pikaday.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/script.min.js -->
+    <script src="js/shedule-data.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/form-validation.js"></script>
+    <!-- endbuild -->
+
+
+</body>
+</html>

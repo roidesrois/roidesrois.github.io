@@ -1,0 +1,105 @@
+.popup {position: absolute;}
+
+.lecturer-popup {
+
+    &__content {
+        position: absolute;
+        left: -215px;
+        bottom: 35px;
+        z-index: 999;
+        padding: 20px;
+        width: 550px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16), 0px 4px 5px 0px rgba(0, 0, 0, 0.23);
+
+        &::after {
+            @include clearfix();
+        }
+    }
+
+    &--hidden {
+        display: none;
+    }
+
+    &__tail {
+        position: absolute;
+        bottom: -12px;
+        border-radius: 3px;
+        left: 263px;
+        width: 25px;
+        height: 25px;
+        background: #fff;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+        box-shadow: 4px -4px 5px 0px rgba(0, 0, 0, 0.16);
+    }
+
+    &__close {
+        position: absolute;
+        top: 22px;
+        right: 22px;
+        width: 14px;
+        height: 14px;
+        background: url("../images/icons/close.svg");
+        cursor: pointer;
+    }
+    img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.19);
+    }
+
+    &__name {
+        display: block;
+        padding-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    &__img {
+        display: block;
+        float: left;
+    }
+
+    &__desc {
+        display: block;
+        padding-left: 20px;
+        float: left;
+        width: 335px;
+
+        p {
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #000;
+        }
+    }
+
+    @media (max-width: 760px) {
+        &__content {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            bottom: auto;
+            width: 90%;
+
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        &__tail {
+            display: none;
+        }
+
+        &__name {
+            padding-top: 15px;
+        }
+
+        &__desc {
+            width: 100%;
+            padding: 0;
+        }
+    }
+}

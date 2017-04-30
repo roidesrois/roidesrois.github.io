@@ -1,0 +1,15 @@
+@mixin font-face($font-family, $file, $font-weight, $font-style) {
+    $filepath: "../fonts/" + $file;
+    @font-face {
+        font-family: $font-family;
+        src: url($filepath + ".woff2") format('woff2'), url($filepath + ".woff") format('woff');
+        font-weight: $font-weight;
+        font-style: $font-style;
+    }
+}
+
+@mixin clearfix() {
+    content: "";
+    display: table;
+    clear: both;
+}
