@@ -79,6 +79,7 @@ h2 {
 }
 .main {
 	flex: 1;
+	color: #fff;
 }
 .row {
 	display: flex;
@@ -178,6 +179,7 @@ h2 {
 	text-decoration: none; 
     padding: 10px 30px;
     display: block;
+    color: #fff;
 }
 .footer {
 	padding: 10px;
