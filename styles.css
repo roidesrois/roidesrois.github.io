@@ -50,7 +50,7 @@ h2 {
     display: flex;
     align-items: center;
     height: 65px;
-	color: #040404;
+	color: #040404 !important;
 	font-size: 16px;
 }
 .menu li {
@@ -66,6 +66,7 @@ h2 {
 }
 .contact-info a {
 	text-decoration: none;
+	color: #040404 !important;
 }
 .container {
 	width: 801px;
@@ -180,7 +181,7 @@ h2 {
 	text-decoration: none; 
     padding: 10px 30px;
     display: block;
-    color: #fff;
+    color: #fff !important;
 }
 .footer {
 	padding: 10px;
