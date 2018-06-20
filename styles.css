@@ -1,0 +1,185 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: inherit;
+	font-size: 1em;
+	color: inherit;
+}
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+nav {
+    list-style: none;
+}
+body {
+	background: #f8f8f8;
+	font-family: 'Arial', sans-serif;
+	font-size: 10pt;
+	color: #fff;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+@media only screen and (min-width: 768px) {
+	body {
+		font-size: 12pt;
+	}
+}
+p {
+	margin: 10px 0;
+}
+h1 {
+    font-size: 2.43em;
+}
+h2 {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.logo {
+    display: inline-block;
+}
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+.menu {
+    display: flex;
+    align-items: center;
+    height: 65px;
+	color: #040404;
+	font-size: 16px;
+}
+.menu li {
+    text-decoration: underline;
+    font-size: 1.13em;
+}
+.menu li:not(:first-child):not(:last-child) {
+    margin: 0 30px;
+}
+.contact-info {
+	color: #646464;
+	text-align: right;
+}
+.contact-info a {
+	text-decoration: none;
+}
+.container {
+	width: 801px;
+	margin: 0 auto;
+}
+.header {
+	display: block;
+	padding: 39px 0;
+	width: 100%;
+	color: #000;
+}
+.main {
+	flex: 1;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+}
+/*@media only screen and (min-width: 1024px) {
+	.row {
+		flex-direction: row;
+	}
+}*/
+.col-2 {
+	flex: 2;
+}
+.col-1 {
+	flex: 1;
+}
+.card {
+    background: #a92328;
+}
+.card-content {
+	padding: 50px;
+}
+.card-content li {
+	font-size: 14px;
+	line-height: 1.7;
+}
+.card-content ul {
+    margin-left: 17px;
+    margin-top: 20px;
+}
+.card-content hr {
+  margin: 0 0 20px;
+  height: 1px;
+  opacity: 0.36;
+  background: #6a1b20; 
+  border: solid 1px #6a1b20;
+}
+.info .card-content {
+	padding: 50px 50px 0;
+}
+.banner {
+	background: url('images/lead-original.jpg') no-repeat;
+	height: 526px;
+    display: flex;
+    align-items: flex-end;
+}
+.banner h1 {
+	font-family: Helvetica;
+	font-weight: normal;
+}
+.text {
+	margin-top: 20px;
+    font-size: 1.06em;
+	line-height: 1.7;
+}
+.partners {
+	background: #fff;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.partners h1 {
+	color: #c70320;
+}
+.list-of-partners {
+	margin: 30px 0;
+	background: url('images/logos.jpg') no-repeat;
+	background-size: contain;
+    height: 183px;
+}
+.subscription-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.subscription-info .prices {
+    display: inline-block;
+    flex: 1;
+}
+.prices h2 {
+	font-size: 24px;
+}
+.prices p {
+	font-size: 16px;
+}
+.btn-primary {
+	background-color: #6a1b20;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 5px;
+	display: inline-block;
+	text-decoration: none;
+	border-radius: 8px;
+	border: none;
+}
+.btn-primary a { 
+	text-decoration: none; 
+    padding: 10px 30px;
+    display: block;
+}
+.footer {
+	padding: 10px;
+	text-align: center;
+}
